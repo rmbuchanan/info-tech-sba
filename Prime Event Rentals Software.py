@@ -1,0 +1,207 @@
+flat_rate = 100000
+redo = "Y"
+equip_condition = "N/A"
+equip_count = 0
+unchanged_count = 0
+minimal_count = 0
+moderate_count = 0
+severe_count = 0
+lost_count = 0
+damage_count = 0
+total_owed = 0
+print("=" * 54)
+print(" " * 12 + "WELCOME TO PRIME EVENT RENTALS!")
+print("=" * 54)
+print("""Prime Event Rentals has you covered from birthday
+parties to corporate events and everything in between.""")
+print("Let's make your event unforgettable!")
+print("=" * 54)
+print()
+
+while redo == "Y":
+    print("-" * 50)
+    print("CLIENT INFORMATION")
+    print("-" * 50)
+    print()
+    full_name = str(input("Please enter client's full name. "))
+    print()
+    contact_info_choice = int(input("""Please choose which mode we may use to contact 
+the client. 
+    Enter 1 to input the client's phone number
+    or 
+    Enter 2 to input the client's email address. """))
+    print()
+    if contact_info_choice == 1:
+        email_address = "N/A"
+        phone_num = int(input("""Please enter the client's phone number in the format
+0000000000 with the first three digits being
+their area code. """))
+    elif contact_info_choice == 2:
+        phone_num = 0
+        email_address = str(input("""Please enter the client's email address in the format
+johndoe@gmail.com. """))
+    else:
+        print("Invalid Input.")
+    print()
+    address = str(input("Please enter the company's address. "))
+    print()
+    ID_type_choice = int(input("""Please enter the type of ID to be used.
+    Enter 1 for Driver's License
+    or
+    Enter 2 for Passport
+    or
+    Enter 3 for National ID. """))
+    if ID_type_choice == 1:
+        ID_type = "Driver's License"
+    elif ID_type_choice == 2:
+        ID_type = "Passport"
+    elif ID_type_choice == 3:
+        ID_type = "National ID"
+    else:
+        print("Invalid Input.")
+    print()
+    ID_num = int(input("Please enter the client's 9-digit ID number. "))
+    if ID_num > 9999999999:
+        print("Invalid Input")
+    print()
+    DOB = str(input("""Please enter the client's date of birth in the format
+dd-mm-yyyy. """))
+    print()
+    company_name = str(input("""Please enter the name of the client's
+company. """))
+    print()
+    print()
+    print("-" * 50)
+    print("RENTAL INFORMATION")
+    print("-" * 50)
+    print()
+    equip_name = str(input("Please enter the name of the equipment rented. "))
+    print()
+    equip_ID = str(input("Please enter the ID of the equipment rented. "))
+    equip_count = equip_count + 1
+    print()
+    equip_condition_choice = int(input("""Please input the condition of the 
+equipment rented after the rental period has ended.
+    Enter 1 for Unchanged Condition
+    or
+    Enter 2 for Minimally Damaged
+    or
+    Enter 3 for Moderately Damaged
+    or
+    Enter 4 for Severely Damaged
+    or
+    Enter 5 for Lost Equipment. """))
+    if equip_condition_choice == 1:
+        equip_condition = "Unchanged"
+        unchanged_count = unchanged_count + 1
+    elif equip_condition_choice == 2:
+        equip_condition = "Minimal Damage"
+        minimal_count = minimal_count + 1
+    elif equip_condition_choice == 3:
+        equip_condition = "Moderate Damage"
+        moderate_count = moderate_count + 1
+    elif equip_condition_choice == 4:
+        equip_condition = "Severely Damaged"
+        severe_count = severe_count + 1
+    elif equip_condition_choice == 5:
+        equip_condition = "Lost Equipment"
+        lost_count = lost_count + 1
+    else:
+        print("Invalid Input")
+    print()
+    equip_cost = float(input("""Please input the original cost of the equipment
+rented. """))
+    round(equip_cost,2)
+    print()
+    initial_deposit = float(input("""Please input the client's initial
+deposit for the rental. """))
+    round(initial_deposit,2)
+    if equip_condition_choice == 1:
+        discount_statement = "10% Discount."
+        add_cost = 0
+        discount_cost = equip_cost * 0.1
+        total_cost = flat_rate + (equip_cost - discount_cost)
+    elif equip_condition_choice == 2:
+        discount_statement = "No Discount."
+        add_cost = equip_cost * 0.25
+        discount_cost = 0
+        total_cost = flat_rate + add_cost + equip_cost
+    elif equip_condition_choice == 3:
+        discount_statement = "No Discount."
+        add_cost = equip_cost * 0.6
+        discount_cost = 0
+        total_cost = flat_rate + add_cost + equip_cost
+    elif equip_condition_choice in [4,5]:
+        discount_statement = "No Discount."
+        add_cost = equip_cost * 1.25
+        discount_cost = 0
+        total_cost = flat_rate + add_cost + equip_cost
+    else:
+        total_cost = 0
+    balance = total_cost - initial_deposit
+    total_owed = total_owed + balance
+    print()
+    print("-" * 50)
+    print("INVOICE")
+    print("-" * 50)
+    print()
+    print("Client's Full Name:", full_name)
+    print()
+    print("Client's Phone Number:", phone_num)
+    print()
+    print("Client's Email Address:", email_address)
+    print()
+    print("Client's Address:", address)
+    print()
+    print("Client's Chosen ID Type:", ID_type)
+    print()
+    print("Client's ID Number:", ID_num)
+    print()
+    print("Client's Date of Birth:", DOB)
+    print()
+    print("Client's Company Name:", company_name)
+    print()
+    print("Name of Equipment Rented:", equip_name)
+    print()
+    print("ID of Equipment Rented:", equip_ID)
+    print()
+    print("Client's Initial Deposit:", initial_deposit)
+    print()
+    print("Client's Sub-Total:", total_cost)
+    print()
+    print(discount_statement)
+    if equip_condition_choice == 1:
+        print("Discount:", discount_cost)
+    else:
+        print("Additional Cost:", add_cost)
+    print()
+    print("Balance Owed:", balance)
+    print()
+    cont = str(input("""Would you like to input another client's information?
+Enter Y for yes
+or
+Enter N for no. """)).upper()
+    print()
+    if cont == "N":
+        print("-" * 50)
+        print("SUMMARY")
+        print("-" * 50)
+        print()
+        print("Total Number of Items Rented:", equip_count)
+        print()
+        print("Total Number of Unchanged Items Rented:", unchanged_count)
+        print()
+        print("Total Number of Minimally Damaged Items Rented:", minimal_count)
+        print()
+        print("Total Number of Moderately Damaged Items Rented:", moderate_count)
+        print()
+        print("Total Number of Severely Damaged Items Rented:", severe_count)
+        print()
+        print("Total Number of Lost Items Rented:", lost_count)
+        damage_count = minimal_count + moderate_count + severe_count
+        print()
+        print("Total Percentage of Items Damaged:", (damage_count/equip_count)*100)
+        print()
+        print("Total Amount Owed To The Company:", total_owed)
+        print("-" * 50)
+        redo = "N"
